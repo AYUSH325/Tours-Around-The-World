@@ -14,6 +14,7 @@ const { isUserLoggedInFrontend, isUserLoggedIn } = authController;
 
 const router = express.Router();
 
+router.use(viewController.alert);
 router.get('/me', isUserLoggedIn, getAccount);
 router.post('/submit-user-data', isUserLoggedIn, updateUserData);
 router.get('/my-tours', isUserLoggedIn, getMyTours);
