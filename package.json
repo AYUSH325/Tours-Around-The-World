@@ -14,7 +14,7 @@
   "author": "Ayush Ganguly",
   "license": "ISC",
   "engines": {
-    "node": "^14.0.0"
+    "node": "^14"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
