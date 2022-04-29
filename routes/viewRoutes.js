@@ -1,6 +1,6 @@
 const express = require('express');
-const viewController = require('./../controllers/viewController');
-const authController = require('./../controllers/authController');
+const viewController = require('../controllers/viewController');
+const authController = require('../controllers/authController');
 
 const {
   getOverview,
@@ -18,9 +18,8 @@ router.get('/me', isUserLoggedIn, getAccount);
 router.post('/submit-user-data', isUserLoggedIn, updateUserData);
 router.get('/my-tours', isUserLoggedIn, getMyTours);
 
-router.get('/', isUserLoggedInFrontend, getOverview);
-
 router.use(isUserLoggedInFrontend);
+router.get('/', getOverview);
 router.get('/tour/:slug', getTour);
 router.get('/login', userLoginForm);
 
