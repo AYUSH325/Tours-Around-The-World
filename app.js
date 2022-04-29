@@ -38,7 +38,14 @@ app.options('*', cors());
 app.use(express.static(path.join(__dirname, '/public')));
 
 // Security HTTP headers
-app.use(helmet());
+app.use(
+  helmet.contentSecurityPolicy({
+    directives: {
+      defaultSrc: ["'self'"],
+      imgSrc: ["'self'", 'example.com']
+    }
+  })
+);
 
 // Development logging
 if (process.env.NODE_ENV === 'development') {
