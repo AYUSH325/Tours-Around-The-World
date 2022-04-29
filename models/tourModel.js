@@ -152,11 +152,6 @@ tourSchema.pre(/^find/, function(next) {
   next();
 });
 
-tourSchema.post(/^find/, (docs, next) => {
-  console.log(`Query took ${Date.now() - this.start} milliseconds`);
-  next();
-});
-
 //Aggreation Middleware
 tourSchema.pre('aggregate', function(next) {
   if (
