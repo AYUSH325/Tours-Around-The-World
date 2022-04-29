@@ -14,7 +14,7 @@
   "author": "Ayush Ganguly",
   "license": "ISC",
   "engines": {
-    "node": ">=10.0.0"
+    "node": "^14.0.0"
   },
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
@@ -22,6 +22,7 @@
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
     "express-mongo-sanitize": "^2.2.0",
