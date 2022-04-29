@@ -12,7 +12,7 @@ const loginToken = id => {
   });
 };
 
-const createAndSendToken = (user, statusCode, res) => {
+const createAndSendToken = (user, statusCode, req, res) => {
   const token = loginToken(user._id);
 
   res.cookie('jwt', token, {
@@ -20,7 +20,8 @@ const createAndSendToken = (user, statusCode, res) => {
       Date.now() +
         process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
-    secure: process.env.NODE_ENV === 'production',
+    secure:
+      req.secure || req.headers['x-forwarded-proto'] === 'https',
     httpOnly: true
   });
 
@@ -57,7 +58,7 @@ exports.signup = catchAsync(async (req, res, next) => {
   const url = `${req.protocol}://${req.get('host')}/me`;
   await new Email(newUser, url).sendWelcome();
 
-  createAndSendToken(newUser, 201, res);
+  createAndSendToken(newUser, 201, req, res);
 });
 
 exports.login = catchAsync(async (req, res, next) => {
@@ -82,7 +83,7 @@ exports.login = catchAsync(async (req, res, next) => {
   }
 
   //3.) Send JWT back to client
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, req, res);
 });
 
 exports.isUserLoggedIn = catchAsync(async (req, res, next) => {
@@ -223,7 +224,7 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   //3.) Update changePasswordAt property for the user
   //4.) Log the user in, send JWT
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, req, res);
 });
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
@@ -242,7 +243,7 @@ exports.updatePassword = catchAsync(async (req, res, next) => {
   user.passwordConfirm = req.body.passwordConfirm;
   await user.save();
 
-  createAndSendToken(user, 200, res);
+  createAndSendToken(user, 200, req, res);
 });
 
 // Only for rendered pages, no errors!
