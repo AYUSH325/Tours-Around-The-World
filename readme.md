@@ -1,8 +1,7 @@
 # Tours Around The World Application
 
 Built using modern technologies: node.js, express, mongoDB, mongoose, pug and a plethora of third party libraries.
-Site Deployed At https://tours-around-the-world.herokuapp.com/
-
+Site Deployed At https://tours-around-the-world.onrender.com
 Test Accounts:
 
 Admin
